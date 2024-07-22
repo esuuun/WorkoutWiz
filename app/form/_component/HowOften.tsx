@@ -20,12 +20,13 @@ interface FormData {
   weight: string;
   howOften: string;
   where: string;
+  additionalProblem: string;
 }
 
 function HowOften() {
   const { formData, setFormData } = useFormStore();
   const [loading, setLoading] = useState(false);
-  const [isSubscribed, setIsSubscribed] = useState(false); 
+  const [isSubscribed, setIsSubscribed] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const router = useRouter();
@@ -35,7 +36,7 @@ function HowOften() {
   useEffect(() => {
     const checkSubscription = async () => {
       try {
-        setLoading(true)
+        setLoading(true);
         const response = await axios.get("/api/check-subscription");
         if (response.status === 200) {
           setIsSubscribed(true);
@@ -45,9 +46,8 @@ function HowOften() {
       } finally {
         setTimeout(() => {
           setLoading(false);
-        }, 500)
+        }, 500);
       }
-
     };
     checkSubscription();
   }, []);
@@ -83,19 +83,20 @@ function HowOften() {
     },
   ];
 
-  const generateAi = async (updatedFormData : FormData) => {
+  const generateAi = async (updatedFormData: FormData) => {
     setLoading(true);
     const { goal, gender, level, height, weight, howOften, where } =
       updatedFormData;
-    const finalAiPrompt = prompt(
-      goal,
-      gender,
-      level,
-      height,
-      weight,
-      howOften,
-      where
-    );
+    const finalAiPrompt = prompt({
+      goal: updatedFormData.goal,
+      gender: updatedFormData.gender,
+      level: updatedFormData.level,
+      height: parseFloat(updatedFormData.height), // Ensure height is a number
+      weight: parseFloat(updatedFormData.weight), // Ensure weight is a number
+      howOften: updatedFormData.howOften,
+      where: updatedFormData.where,
+      additionalProblem: updatedFormData.additionalProblem,
+    });
     const aiResponse = await chatSession.sendMessage(finalAiPrompt);
 
     try {
@@ -110,7 +111,7 @@ function HowOften() {
       if (jsonStringMatch && jsonStringMatch[1]) {
         const jsonString = jsonStringMatch[1];
 
-        console.log(aiResponse.usageMetadata)
+        console.log(aiResponse.usageMetadata);
         // console.log("Extracted JSON String:", jsonString);
         try {
           const workoutPlan = JSON.parse(jsonString);
@@ -167,7 +168,7 @@ function HowOften() {
     }
   };
 
-  const handleClick = async (name:string) => {
+  const handleClick = async (name: string) => {
     if (!isSubscribed) {
       setIsModalOpen(true);
       return;
