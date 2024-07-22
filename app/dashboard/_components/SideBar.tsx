@@ -117,7 +117,7 @@ export default function Sidebar() {
             <CardHeader className="p-2 pt-0 md:p-4">
               <CardTitle>Encountering Issues?</CardTitle>
               <CardDescription>
-              If you're experiencing any problems, please contact us for assistance. We're here to help!
+              If you&apos;re experiencing any problems, please contact us for assistance. We&apos;re here to help!
               </CardDescription>
             </CardHeader>
             <CardContent className="p-2 pt-0 md:p-4 md:pt-0">

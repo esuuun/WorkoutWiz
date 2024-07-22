@@ -114,7 +114,7 @@ export default function MobileNav() {
             <CardHeader>
               <CardTitle>Encountering Issues?</CardTitle>
               <CardDescription>
-                If you're experiencing any problems, please contact us for assistance. We're here to help!
+                If you&apos;re experiencing any problems, please contact us for assistance. We&apos;re here to help!
               </CardDescription>
             </CardHeader>
             <CardContent>

@@ -136,14 +136,14 @@ function HeroSection() {
         </div>
       </section>
 
-        <div className="relative flex justify-center mb-24">
-          <Image
-            src="img/heroSectionImg.png"
-            alt="Dashboard image"
-            className="relative z-10"
-          />
-          <div className=" z-20 absolute bottom-0 left-0 w-full h-2/4 bg-gradient-to-t from-background to-transparent"></div>
-        </div>
+      <div className="relative flex justify-center mb-24">
+        <image
+          src="img/heroSectionImg.png"
+          alt="Dashboard image"
+          className="relative z-10"
+        />
+        <div className=" z-20 absolute bottom-0 left-0 w-full h-2/4 bg-gradient-to-t from-background to-transparent"></div>
+      </div>
     </>
   );
 }
