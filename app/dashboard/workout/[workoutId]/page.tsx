@@ -142,7 +142,7 @@ const WorkoutPage = ({ params }: { params: WorkoutProps }) => {
   }
 
   return (
-    <div className="p-14 h-screen">
+    <div className="p-6 md:p-14 h-screen">
       <Card className="h-full">
         <ScrollArea className="h-full pt-4">
           <CardHeader>
