@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import useFormStore from "@/store/formStore";
 import Link from "next/link";
 import { chatSession } from "@/utils/AiModel";
-import prompt from "@/app/_aiPrompt/prompt";
+import prompt from "@/app/_aiPrompt/Prompt";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
