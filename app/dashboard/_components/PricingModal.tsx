@@ -4,7 +4,12 @@ import axios from 'axios';
 import { Check, LoaderCircle, Unlock, X } from 'lucide-react';
 import React, { useState } from 'react';
 
-function PricingModal({ isOpen, onClose }) {
+interface PricingModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+function PricingModal({ isOpen, onClose }:PricingModalProps) {
   const [loading,setLoading] = useState(false)
   if (!isOpen) return null;
 

@@ -20,7 +20,7 @@ function VideoPlayer() {
         </h1>
         <div className="flex-1 max-w-3xl mx-auto mt-14 xl:mt-0 ">
           <div className="relative mt-10">
-            <image src="img\heroSectionImg.png" className="rounded-lg" alt="" />
+            <img src="img/heroSectionImg.png" className="rounded-lg" alt="Thumbnail" />
             <button
               className="absolute w-16 h-16 rounded-full inset-0 m-auto duration-150 bg-primary hover:bg-muted ring-offset-2 focus:ring "
               onClick={() => setVideoPopUp(true)}

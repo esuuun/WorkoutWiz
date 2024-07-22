@@ -96,7 +96,7 @@ function HeroSection() {
                   </Link>
                   <SignOutButton>
                     <button
-                      className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary-foreground text-primary`}
+                      className={`flex items-center gap-3 rounded-lg px-3 py-2  transition-all hover:text-primary-foreground text-primary`}
                     >
                       <LogOut className="h-4 w-4" />
                       <span>Logout</span>
@@ -137,7 +137,7 @@ function HeroSection() {
       </section>
 
       <div className="relative flex justify-center mb-24">
-        <image
+        <img
           src="img/heroSectionImg.png"
           alt="Dashboard image"
           className="relative z-10"

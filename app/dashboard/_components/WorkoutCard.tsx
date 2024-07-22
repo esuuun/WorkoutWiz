@@ -42,17 +42,24 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+
+interface Workout {
+  id: string;
+  title: string;
+  progress: number;
+  days: any[];
+}
 
 function WorkoutCard() {
   const { isLoaded, userId } = useAuth();
-  const [workouts, setWorkouts] = useState([]);
+  const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [loading, setLoading] = useState(true);
-  const [progress, setProgress] = useState({});
+  const [progress, setProgress] = useState<{ [key: string]: number }>({});
   const [dialogOpen, setDialogOpen] = useState(false);
   const [renameDialogOpen, setRenameDialogOpen] = useState(false);
-  const [selectedWorkout, setSelectedWorkout] = useState(null);
+  const [selectedWorkout, setSelectedWorkout] = useState<Workout | null>(null);
   const [newWorkoutName, setNewWorkoutName] = useState("");
 
   const { toast } = useToast();
@@ -65,7 +72,7 @@ function WorkoutCard() {
         const response = await axios.get("/api/workout/get");
         setWorkouts(response.data);
 
-        const initialProgress = response.data.reduce((acc, workout) => {
+        const initialProgress = response.data.reduce((acc: { [key: string]: number }, workout: Workout) => {
           acc[workout.id] = workout.progress || 0;
           return acc;
         }, {});
@@ -75,7 +82,7 @@ function WorkoutCard() {
       } finally {
         setTimeout(() => {
           setLoading(false);
-        }, 1000)
+        }, 1000);
       }
     };
 
@@ -90,7 +97,7 @@ function WorkoutCard() {
     );
   }
 
-  const handleDeleteClick = (workout) => {
+  const handleDeleteClick = (workout: Workout) => {
     setSelectedWorkout(workout);
     setDialogOpen(true);
   };
@@ -102,17 +109,15 @@ function WorkoutCard() {
 
   const handleDeleteConfirm = async () => {
     setLoading(true);
-    console.log(selectedWorkout);
-    // delete from database
     try {
       await axios.delete("/api/workout/delete", {
-        data: { workoutId: selectedWorkout.id },
+        data: { workoutId: selectedWorkout?.id },
       });
-      console.log(`Workout ${selectedWorkout.id} deleted successfully`);
+      console.log(`Workout ${selectedWorkout?.id} deleted successfully`);
       const response = await axios.get("/api/workout/get");
       setWorkouts(response.data);
       toast({
-        title: "Your Workout Succesfully Deleted!",
+        title: "Your Workout Successfully Deleted!",
       });
     } catch (error) {
       console.error("Error deleting workout:", error);
@@ -127,9 +132,7 @@ function WorkoutCard() {
     }
   };
 
-  // rename
-
-  const handleRenameDialogOpen = (workout) => {
+  const handleRenameDialogOpen = (workout: Workout) => {
     setSelectedWorkout(workout);
     setNewWorkoutName(workout.title); // Initialize input with current workout title
     setRenameDialogOpen(true);
@@ -141,7 +144,7 @@ function WorkoutCard() {
     setNewWorkoutName("");
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewWorkoutName(e.target.value);
   };
 
@@ -149,10 +152,10 @@ function WorkoutCard() {
     setLoading(true);
     try {
       await axios.post("/api/workout/rename", {
-          workoutId: selectedWorkout.id,
-          newTitle : newWorkoutName,
+        workoutId: selectedWorkout?.id,
+        newTitle: newWorkoutName,
       });
-      console.log(`Workout ${selectedWorkout.id} renamed successfully`);
+      console.log(`Workout ${selectedWorkout?.id} renamed successfully`);
       const response = await axios.get("/api/workout/get");
       setWorkouts(response.data);
       toast({
@@ -171,7 +174,6 @@ function WorkoutCard() {
     }
   };
 
-
   return (
     <div className="flex w-full md:w-fit gap-10 flex-wrap justify-center">
       {workouts.length > 0 ? (
@@ -187,7 +189,7 @@ function WorkoutCard() {
                   <EllipsisVertical />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem onSelect={()=>handleRenameDialogOpen(workout)}>
+                  <DropdownMenuItem onSelect={() => handleRenameDialogOpen(workout)}>
                     Rename 
                   </DropdownMenuItem>
                   <DropdownMenuItem onSelect={() => handleDeleteClick(workout)}>
@@ -197,9 +199,7 @@ function WorkoutCard() {
               </DropdownMenu>
             </div>
 
-            <Link
-              href={`/dashboard/workout/${workout.id}`}
-            >
+            <Link href={`/dashboard/workout/${workout.id}`}>
               <Card className="w-64 h-fit text-center ">
                 <CardHeader>
                   <CardTitle>{workout.title}</CardTitle>
@@ -256,7 +256,7 @@ function WorkoutCard() {
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid items-center gap-4">
-              <Input value={newWorkoutName} onChange={handleInputChange} className="w-full"/>
+              <Input value={newWorkoutName} onChange={handleInputChange} className="w-full" />
             </div>
           </div>
           <DialogFooter>
