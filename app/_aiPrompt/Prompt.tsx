@@ -55,6 +55,8 @@ function prompt(
     i want to workout at least ${howOften} 
     i usually workout at ${where}
     i have a problem : ${additionalProblem}
+    
+    i dont want any of it undefined
     `;
 
   return promptText;
