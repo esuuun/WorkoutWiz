@@ -3,7 +3,7 @@
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Icon, icons } from "lucide-react";
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import useFormStore from "@/store/formStore";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -13,7 +13,7 @@ function Weight() {
   const { formData, setFormData } = useFormStore();
   const [inputValid, setInputValid] = useState(false);
 
-  const handleInput = (event) => {
+  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
     setFormData({ ...formData, weight: value });
     setInputValid(value.trim() !== "");

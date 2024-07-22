@@ -12,6 +12,16 @@ import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 import PricingModal from "@/app/dashboard/_components/PricingModal";
 
+interface FormData {
+  goal: string;
+  gender: string;
+  level: string;
+  height: string;
+  weight: string;
+  howOften: string;
+  where: string;
+}
+
 function HowOften() {
   const { formData, setFormData } = useFormStore();
   const [loading, setLoading] = useState(false);
@@ -73,7 +83,7 @@ function HowOften() {
     },
   ];
 
-  const generateAi = async (updatedFormData) => {
+  const generateAi = async (updatedFormData : FormData) => {
     setLoading(true);
     const { goal, gender, level, height, weight, howOften, where } =
       updatedFormData;
@@ -157,7 +167,7 @@ function HowOften() {
     }
   };
 
-  const handleClick = async (name) => {
+  const handleClick = async (name:string) => {
     if (!isSubscribed) {
       setIsModalOpen(true);
       return;

@@ -25,7 +25,7 @@ function FitnesLevel() {
     },
   ];
 
-  const handleClick = (name) => {
+  const handleClick = (name : string) => {
     setFormData({ ...formData, level:name }); 
     // console.log({ ...formData });
   }

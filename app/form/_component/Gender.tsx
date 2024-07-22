@@ -20,7 +20,7 @@ function Gender() {
     },
   ];
 
-  const handleClick = (name) => {
+  const handleClick = (name : string) => {
     setFormData({ ...formData, gender: name }); 
     // console.log({ ...formData });
   }

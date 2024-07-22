@@ -3,7 +3,7 @@
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Icon, icons } from "lucide-react";
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import useFormStore from "@/store/formStore";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -13,7 +13,7 @@ function Problems() {
 
   const { formData, setFormData } = useFormStore();
 
-  const handleInput = (event) => {
+  const handleInput = (event:ChangeEvent<HTMLTextAreaElement>) => {
     const value = event.target.value
     setFormData({ ...formData, additionalProblem: value });
     // console.log({ ...formData });
@@ -25,7 +25,7 @@ function Problems() {
       Additional Workout Concerns?
       </h1>
       <div className="flex mt-3">
-        <Textarea placeholder="I have a knee injuree, i only have dumbell at home..."
+        <Textarea placeholder="I have a knee injury, I only have dumbbells at home..."
           value={formData.additionalProblem}
           onChange={handleInput} className="text-lg h-44 resize-none" />
       </div>

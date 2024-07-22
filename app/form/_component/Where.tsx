@@ -25,7 +25,7 @@ function Where() {
     },
   ];
 
-  const handleClick = (name) => {
+  const handleClick = (name:string) => {
     setFormData({ ...formData, where:name }); 
     // console.log({ ...formData });
   }

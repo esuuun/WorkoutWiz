@@ -24,7 +24,7 @@ function Goal() {
     },
   ];
 
-  const handleClick = (name) => {
+  const handleClick = (name : string) => {
     setFormData({ ...formData, goal: name }); 
   }
 

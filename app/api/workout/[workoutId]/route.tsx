@@ -2,6 +2,17 @@ import { auth } from "@clerk/nextjs/server";
 import { db } from "@/utils/db";
 import { NextResponse } from "next/server";
 
+interface Exercise {
+  id: string;
+  completed: boolean;
+}
+
+interface Day {
+  id: string;
+  dayNumber: number;
+  exercises: Exercise[];
+}
+
 export  async function GET(req: Request   , context : any) {
   const {params} = context
 
@@ -48,7 +59,7 @@ export async function POST(req: Request, context: any) {
     }
 
     const body = await req.json();
-    const { progress , days } = body;
+    const { progress , days }:{ progress: number, days: Day[] } = body;
 
     
     const updatedWorkout = await db.workout.update({

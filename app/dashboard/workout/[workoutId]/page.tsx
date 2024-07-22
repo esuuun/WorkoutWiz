@@ -13,21 +13,41 @@ import { Check, CircleCheckBig, Dumbbell, ListChecks, Loader2Icon } from "lucide
 import { useEffect, useState } from "react";
 import BackButton from "../../_components/BackButton";
 
+interface Exercise {
+  id: string;
+  name: string;
+  sets: number;
+  reps: number;
+  completed: boolean;
+}
+
+interface Day {
+  id: string;
+  dayNumber: number;
+  exercises: Exercise[];
+}
+
+interface Workout {
+  id: string;
+  title: string;
+  progress: number;
+  days: Day[];
+}
+
 interface WorkoutProps {
   workoutId: string;
 }
 
 const WorkoutPage = ({ params }: { params: WorkoutProps }) => {
-  const [workout, setWorkout] = useState<any>(null);
+  const [workout, setWorkout] = useState<Workout | null>(null);
   const [progress, setProgress] = useState<number>(0);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchWorkout = async () => {
       try {
         const response = await axios.get(`/api/workout/${params.workoutId}`);
         setWorkout(response.data);
-        // calculateProgress(response.data);
         setProgress(response.data.progress);
       } catch (error) {
         console.error("Error fetching workouts:", error);
@@ -37,13 +57,13 @@ const WorkoutPage = ({ params }: { params: WorkoutProps }) => {
     fetchWorkout();
   }, [params.workoutId]);
 
-  const calculateProgress = (data: any) => {
+  const calculateProgress = (data: Workout) => {
     let totalExercises = 0;
     let completedExercises = 0;
 
-    data.days.forEach((day: any) => {
+    data.days.forEach((day) => {
       totalExercises += day.exercises.length;
-      day.exercises.forEach((exercise: any) => {
+      day.exercises.forEach((exercise) => {
         if (exercise.completed) {
           completedExercises++;
         }
@@ -60,16 +80,16 @@ const WorkoutPage = ({ params }: { params: WorkoutProps }) => {
 
   const handleCheckboxChange = (dayIndex: number, exerciseIndex: number) => {
     const updatedWorkout = {
-      ...workout,
-      days: workout.days.map((day: any, dIndex: number) => {
+      ...workout!,
+      days: workout!.days.map((day, dIndex) => {
         if (dIndex === dayIndex) {
           return {
             ...day,
-            exercises: day.exercises.map((exercise: any, eIndex: number) => {
+            exercises: day.exercises.map((exercise, eIndex) => {
               if (eIndex === exerciseIndex) {
                 return {
                   ...exercise,
-                  completed: !exercise.completed || false,
+                  completed: !exercise.completed,
                 };
               }
               return exercise;
@@ -83,16 +103,15 @@ const WorkoutPage = ({ params }: { params: WorkoutProps }) => {
     calculateProgress(updatedWorkout);
   };
 
-  const saveWorkout = async (updatedWorkout) => {
+  const saveWorkout = async (updatedWorkout: Workout) => {
+    setLoading(true);
 
-    setLoading(true)
-    
     try {
       const response = await axios.post(`/api/workout/${params.workoutId}`, {
         progress: Number(progress.toFixed(0)),
-        days: workout.days.map((day: any) => ({
+        days: updatedWorkout.days.map((day) => ({
           id: day.id,
-          exercises: day.exercises.map((exercise: any) => ({
+          exercises: day.exercises.map((exercise) => ({
             id: exercise.id,
             completed: exercise.completed,
           })),
@@ -106,11 +125,11 @@ const WorkoutPage = ({ params }: { params: WorkoutProps }) => {
       console.error("Error saving workout:", error);
       toast({
         title: "Error saving your workout",
-        description: "try again later!",
-        variant:"destructive",
+        description: "Try again later!",
+        variant: "destructive",
       });
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -119,7 +138,7 @@ const WorkoutPage = ({ params }: { params: WorkoutProps }) => {
       <div className="h-screen flex justify-center items-center">
         <Loader2Icon className="animate-spin" size={50} />
       </div>
-    )
+    );
   }
 
   return (
@@ -130,10 +149,10 @@ const WorkoutPage = ({ params }: { params: WorkoutProps }) => {
             <div className="flex justify-between">
               <div>
                 <Dumbbell className="w-20 h-20 bg-primary p-2 rounded-lg -translate-y-4 translate-x-4 drop-shadow-lg" />
-                <CardTitle className="text-4xl">{workout?.title}</CardTitle>
+                <CardTitle className="text-4xl">{workout.title}</CardTitle>
               </div>
               <div className="w-full max-w-xl">
-                <div className="flex justify-between ">
+                <div className="flex justify-between">
                   <span>Progress</span>
                   <span>{progress.toFixed(0)}%</span>
                 </div>
@@ -141,34 +160,48 @@ const WorkoutPage = ({ params }: { params: WorkoutProps }) => {
               </div>
             </div>
             <div className="pt-3">
-              <Button className="w-fit" onClick={saveWorkout}>{loading ? <Loader2Icon className="animate-spin"  />:<span className="flex"> Save Progress <CircleCheckBig className="ml-2" size={18}/> </span>}</Button></div>
-            <div className="mt-2"><div className="bg-muted w-full h-1 mt-5 rounded-sm"></div></div>
+              <Button className="w-fit" onClick={() => saveWorkout(workout)}>
+                {loading ? (
+                  <Loader2Icon className="animate-spin" />
+                ) : (
+                  <span className="flex">
+                    Save Progress <CircleCheckBig className="ml-2" size={18} />
+                  </span>
+                )}
+              </Button>
+            </div>
+            <div className="mt-2">
+              <div className="bg-muted w-full h-1 mt-5 rounded-sm"></div>
+            </div>
           </CardHeader>
 
-
           <CardContent>
-            {workout.days.map((day: any, dayIndex: number) => (
+            {workout.days.map((day, dayIndex) => (
               <div key={dayIndex} className="mt-8">
                 <span className="text-2xl font-semibold">
                   Day {day.dayNumber}{" "}
                 </span>
                 <div>
-                  {day.exercises.map((exercise: any, exerciseIndex: number) => (
+                  {day.exercises.map((exercise, exerciseIndex) => (
                     <div
                       className="flex gap-8 mt-3 items-center"
                       key={exerciseIndex}
                     >
                       <Checkbox
-                        checked={exercise.completed || false}
+                        checked={exercise.completed}
                         onCheckedChange={() =>
                           handleCheckboxChange(dayIndex, exerciseIndex)
                         }
                       />
-                      <span className={`font-medium ${exercise.completed ? 'line-through text-muted' : ''}`}>{exercise.name}</span>
-                      <Badge>Sets : {exercise.sets}</Badge>
-                      <Badge variant={"secondary"}>
-                        Reps : {exercise.reps}
-                      </Badge>
+                      <span
+                        className={`font-medium ${
+                          exercise.completed ? "line-through text-muted" : ""
+                        }`}
+                      >
+                        {exercise.name}
+                      </span>
+                      <Badge>Sets: {exercise.sets}</Badge>
+                      <Badge variant={"secondary"}>Reps: {exercise.reps}</Badge>
                     </div>
                   ))}
                 </div>
