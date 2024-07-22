@@ -146,7 +146,7 @@ const WorkoutPage = ({ params }: { params: WorkoutProps }) => {
       <Card className="h-full">
         <ScrollArea className="h-full pt-4">
           <CardHeader>
-            <div className="flex justify-between">
+            <div className="flex justify-between flex-wrap md:flex-nowrap">
               <div>
                 <Dumbbell className="w-20 h-20 bg-primary p-2 rounded-lg -translate-y-4 translate-x-4 drop-shadow-lg" />
                 <CardTitle className="text-4xl">{workout.title}</CardTitle>
@@ -184,7 +184,7 @@ const WorkoutPage = ({ params }: { params: WorkoutProps }) => {
                 <div>
                   {day.exercises.map((exercise, exerciseIndex) => (
                     <div
-                      className="flex gap-8 mt-3 items-center"
+                      className="flex gap-x-8 gap-y-3 mt-3 items-center flex-wrap"
                       key={exerciseIndex}
                     >
                       <Checkbox
