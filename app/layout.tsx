@@ -19,7 +19,10 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" className="dark scroll-smooth">
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          {children}
+          <Analytics />
+        </body>
       </html>
     </ClerkProvider>
   );
