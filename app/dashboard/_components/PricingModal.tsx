@@ -14,12 +14,26 @@ function PricingModal({ isOpen, onClose }:PricingModalProps) {
   if (!isOpen) return null;
 
   const onSubscribe = async () => {
+    // try {
+    //   setLoading(true)
+    //   const response = await axios.get('/api/stripe')
+    //   window.location.href = response.data.url
+    // } catch (error) {
+    //   console.log(error,'STRIPE_CLIENT_ERROR')
+    // }
+    // finally {
+    //   setLoading(false)
+    // }
+
+    //LEMON SQUEEZY
     try {
       setLoading(true)
-      const response = await axios.get('/api/stripe')
-      window.location.href = response.data.url
+      const response = await axios.post('/api/lemonSqueezy/purchaseProducts', {
+        productId : process.env.NEXT_PUBLIC_LEMON_SQUEEZY_PRODUCT_ID?.toString()
+      })
+      window.open(response.data.checkoutUrl);
     } catch (error) {
-      console.log(error,'STRIPE_CLIENT_ERROR')
+      console.log(error,'LEMON_SQUEEZY_CLIENT_ERROR')
     }
     finally {
       setLoading(false)

@@ -49,3 +49,12 @@ model UserSubscription {
   stripePriceId           String?   @map(name: "stripe_price_id")
   stripeCurrentPeriodEnd  DateTime? @map(name: "stripe_current_period_end")
 }
+
+model Subscription{
+  id        String    @id @default(cuid())
+  userId    String    @unique
+  lemonSqueezyCustomerId        String?   @unique @map(name: "lemon_squeezy_customer_id")
+  lemonSqueezySubscriptionId    String?   @unique @map(name: "lemon_squeezy_subscription_id")
+  lemonSqueezyPriceId         String?   @map(name: "lemon_squeezy_variant_id")
+  lemonSqueezyCurrentPeriodEnd  DateTime? @map(name: "lemon_squeezy_current_period_end")
+}

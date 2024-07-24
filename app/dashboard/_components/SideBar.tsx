@@ -38,10 +38,10 @@ export default function Sidebar() {
   const billingPage = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("/api/stripe");
+      const response = await axios.get("/api/lemonSqueezy/customerPortal");
       // console.log(response.data)
-      const { url } = response.data;
-      router.push(url)
+      const { customerPortal } = response.data;
+      router.push(customerPortal)
 
     } catch (error) {
       console.log("BILLING ERROR", error);
