@@ -19,6 +19,8 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { title } from "process";
+import path from "path";
 
 function HeroSection() {
   const [state, setState] = useState(false);
@@ -28,6 +30,7 @@ function HeroSection() {
     { title: "Pricing", path: "#pricing" },
     { title: "How it Works", path: "#howItWorks" },
     { title: "Why WorkoutWiz", path: "#why" },
+    {title: 'Contact Us', path: '#footer'}
   ];
 
   return (

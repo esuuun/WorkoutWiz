@@ -4,7 +4,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="bg-background rounded-lg shadow m-4 mt-14">
+    <footer id="footer" className="bg-background rounded-lg shadow m-4 mt-14">
       <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <a
