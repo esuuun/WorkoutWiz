@@ -55,6 +55,6 @@ model Subscription{
   userId    String    @unique
   lemonSqueezyCustomerId        String?   @unique @map(name: "lemon_squeezy_customer_id")
   lemonSqueezySubscriptionId    String?   @unique @map(name: "lemon_squeezy_subscription_id")
-  lemonSqueezyPriceId         String?   @map(name: "lemon_squeezy_variant_id")
+  lemonSqueezyPriceId         String?   @map(name: "lemon_squeezy_price_id")
   lemonSqueezyCurrentPeriodEnd  DateTime? @map(name: "lemon_squeezy_current_period_end")
 }
