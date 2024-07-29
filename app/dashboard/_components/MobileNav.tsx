@@ -118,9 +118,11 @@ export default function MobileNav() {
               </CardDescription>
             </CardHeader>
             <CardContent>
+              <a href="https://x.com/WorkoutWiz_">
               <Button size="sm" className="w-full flex gap-4">
               <PhoneCall className="h-5 w-5"/> Contact Us
-              </Button>
+                </Button>
+                </a>
             </CardContent>
           </Card>
         </div>

@@ -19,7 +19,7 @@ function Footer() {
             <li>
               <Button variant={"outline"}>
                 <a
-                  href="https://x.com/esuuuuun"
+                  href="https://x.com/WorkoutWiz_"
                   className="flex gap-3 items-center"
                 >
                   <Phone className="h-4 w-4" />

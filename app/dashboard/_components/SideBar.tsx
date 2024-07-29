@@ -121,9 +121,11 @@ export default function Sidebar() {
               </CardDescription>
             </CardHeader>
             <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
+              <a href="https://x.com/WorkoutWiz_">
               <Button size="sm" className="w-full flex gap-4">
                <PhoneCall className="h-4 w-4"/> Contact Us
-              </Button>
+                </Button>
+                </a>
             </CardContent>
           </Card>
         </div>
