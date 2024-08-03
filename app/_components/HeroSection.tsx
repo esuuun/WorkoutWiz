@@ -129,13 +129,26 @@ function HeroSection() {
             quickly!
           </p>
         </div>
-        <div className="flex mt-10 justify-center items-center ">
+        <div className="flex flex-col gap-10 mt-10 justify-center items-center ">
           <a href="/form/goal">
             <Button className="flex gap-4 text-lg font-semibold hover:bg-muted hover:text-foreground ">
               Get Your Workout Now!
               <ArrowRightCircle />
             </Button>
           </a>
+          <a
+  href="https://www.producthunt.com/posts/workoutwiz?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-workoutwiz"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <img
+    src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=476226&theme=dark"
+    alt="WorkoutWiz - Instant Plans for Ultimate Gains. | Product Hunt"
+    style={{ width: '250px', height: '54px' }}
+    width="250"
+    height="54"
+  />
+</a>
         </div>
       </section>
 
@@ -147,6 +160,7 @@ function HeroSection() {
         />
         <div className=" z-20 absolute bottom-0 left-0 w-full h-2/4 bg-gradient-to-t from-background to-transparent"></div>
       </div>
+
     </>
   );
 }
