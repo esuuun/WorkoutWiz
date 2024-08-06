@@ -30,7 +30,7 @@ function HeroSection() {
     { title: "Pricing", path: "#pricing" },
     { title: "How it Works", path: "#howItWorks" },
     { title: "Why WorkoutWiz", path: "#why" },
-    {title: 'Contact Us', path: '#footer'}
+    { title: "Contact Us", path: "#footer" },
   ];
 
   return (
@@ -136,19 +136,6 @@ function HeroSection() {
               <ArrowRightCircle />
             </Button>
           </a>
-          <a
-  href="https://www.producthunt.com/posts/workoutwiz?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-workoutwiz"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  <img
-    src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=476226&theme=dark"
-    alt="WorkoutWiz - Instant Plans for Ultimate Gains. | Product Hunt"
-    style={{ width: '250px', height: '54px' }}
-    width="250"
-    height="54"
-  />
-</a>
         </div>
       </section>
 
@@ -160,7 +147,6 @@ function HeroSection() {
         />
         <div className=" z-20 absolute bottom-0 left-0 w-full h-2/4 bg-gradient-to-t from-background to-transparent"></div>
       </div>
-
     </>
   );
 }

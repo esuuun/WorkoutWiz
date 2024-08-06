@@ -23,7 +23,7 @@ function Pricing() {
         <div className="mx-auto pb-20 mt-4 max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
             <Badge variant="outline" className="text-base">
-              ✨ 33% OFF for first 20 users!
+              ✨ 66,7% OFF for first 20 users!
             </Badge>
 
             <p className="mt-2 text-4xl font-bold tracking-tight text-white sm:text-5xl">
@@ -42,7 +42,7 @@ function Pricing() {
                     $14.99
                   </span>
                   <span className="text-4xl font-bold tracking-tight text-white">
-                    $9.99 <span className="text-base font-normal">/ month</span>
+                    $4.99 <span className="text-base font-normal">/ month</span>
                   </span>
                   <span className="text-sm font-semibold leading-6 text-gray-300"></span>
                 </p>

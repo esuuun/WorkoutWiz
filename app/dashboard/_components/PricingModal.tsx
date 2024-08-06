@@ -60,7 +60,7 @@ function PricingModal({ isOpen, onClose }: PricingModalProps) {
           <p className="flex items-baseline gap-x-1">
             <span className="line-through text-muted-foreground">$14.99</span>
             <span className="text-4xl font-bold tracking-tight text-white">
-              $9.99 <span className="text-base font-normal">/ month</span>
+              $4.99 <span className="text-base font-normal">/ month</span>
             </span>
             <span className="text-sm font-semibold leading-6 text-gray-300"></span>
           </p>
